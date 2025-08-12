@@ -1,0 +1,43 @@
+@font-face {
+  font-family: Doto;
+  src: url(../src/assets/fonts/Doto-Regular.ttf);
+}
+
+@import "tailwindcss";
+/* 🎨 Scrollbar styling toàn bộ dự án */
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px; /* nếu scroll ngang */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
+
+/* 📦 Class tùy chỉnh để ẩn scrollbar */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE, Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #bbb transparent;
+}
