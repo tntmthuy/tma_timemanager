@@ -9,8 +9,6 @@ spring:
     url: jdbc:mysql://localhost:3306/timesphere_test?serverTimezone=Asia/Ho_Chi_Minh
     username: root
     password: root
-  config:
-    import: application-secret.yaml
 
   jpa:
     hibernate:
@@ -29,3 +27,21 @@ logging:
     org:
       springframework:
         security: DEBUG
+
+paypal:
+  client-id: ${PAYPAL_CLIENT_ID}
+  client-secret: ${PAYPAL_CLIENT_SECRET}
+  mode: sandbox
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY}
+      expiration: 86400000
+      refresh-token:
+        expiration: 604800000
