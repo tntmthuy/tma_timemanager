@@ -15,7 +15,8 @@ export type SuggestedSubtask = {
 export const useSubtaskSuggestion = (
   existingSubtasks: SubTask[],
   handleUpdate: (newList: SubTask[]) => void,
-  taskTitle: string
+  taskTitle: string,
+  taskDescription?: string,
 ) => {
   const [suggestedSubtasks, setSuggestedSubtasks] = useState<SuggestedSubtask[]>([]);
   const [isSuggestionModalOpen, setSuggestionModalOpen] = useState(false);
@@ -54,7 +55,7 @@ export const useSubtaskSuggestion = (
 
   const handleRetrySuggestions = async () => {
     setIsLoadingSuggestion(true);
-    const raw = await fetchSubtaskSuggestions(taskTitle); // gọi OpenRouter
+    const raw = await fetchSubtaskSuggestions(taskTitle, taskDescription); // gọi OpenRouter
     const formatted = raw.map((title, idx) => ({
       id: `${idx}`,
       title,
@@ -68,7 +69,7 @@ export const useSubtaskSuggestion = (
   setSuggestionModalOpen(true);
   setIsLoadingSuggestion(true);
 
-  const titles = await fetchSubtaskSuggestions(taskTitle);
+  const titles = await fetchSubtaskSuggestions(taskTitle, taskDescription);
 
   const formatted = titles.map((title, idx) => ({
     id: `sug-${idx}`,

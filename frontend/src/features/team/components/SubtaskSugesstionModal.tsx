@@ -17,6 +17,8 @@ type Props = {
   isLoading?: boolean;
   taskId: string;
   overrideTitle?: string;
+  taskDescription?: string;
+
   onRetry: () => void;
 };
 

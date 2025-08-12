@@ -1,7 +1,13 @@
 // src\features\team\openrouter.ts
-export const fetchSubtaskSuggestions = async (taskTitle: string): Promise<string[]> => {
+export const fetchSubtaskSuggestions = async (
+  taskTitle: string,
+  taskDescription?: string
+): Promise<string[]> => {
+
   try {
     const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
+    console.log("🧠 Prompt gửi đi:", `Dựa trên tiêu đề: "${taskTitle}" và mô tả: "${taskDescription}"...`);
+
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -15,7 +21,7 @@ export const fetchSubtaskSuggestions = async (taskTitle: string): Promise<string
         messages: [
           {
             role: "user",
-            content: `Liệt kê tối đa 8 subtask cụ thể để thực hiện nhiệm vụ: "${taskTitle}". Trả về định dạng danh sách: "- [nội dung]". Không thêm tiêu đề, mở bài hay giải thích.`
+            content: `Dựa trên tiêu đề: "${taskTitle}" và mô tả: "${taskDescription}", hãy liệt kê tối đa 8 subtask cụ thể cần thực hiện. Trả về định dạng danh sách: "- [nội dung]". Không thêm tiêu đề, mở bài hay giải thích.`
           }
         ]
       })

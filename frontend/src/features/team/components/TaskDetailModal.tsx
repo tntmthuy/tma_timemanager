@@ -23,7 +23,10 @@ import type { AttachedFileDTO } from "../comment";
 import { fetchTeamCalendarThunk, searchMembersInTeamThunk } from "../teamSlice";
 import { SubtaskSuggestionModal } from "./SubtaskSugesstionModal";
 import { useSubtaskSuggestion } from "../useSubtakSugesstion";
-import { fetchNotificationsThunk, remindDeadlineThunk } from "../../sidebar/notificationSlice";
+import {
+  fetchNotificationsThunk,
+  remindDeadlineThunk,
+} from "../../sidebar/notificationSlice";
 
 type TaskDetailModalProps = {
   task: TaskDto;
@@ -150,7 +153,7 @@ export const TaskDetailModal = ({
     handleAddSuggestions,
     handleOpenSuggestions,
     handleRetrySuggestions,
-  } = useSubtaskSuggestion(subTasks, handleSubTaskChange, task.taskTitle);
+  } = useSubtaskSuggestion(subTasks, handleSubTaskChange, task.taskTitle, task.description);
   const handleRetry = () => {
     handleRetrySuggestions(); // Gọi lại API từ hook
   };
