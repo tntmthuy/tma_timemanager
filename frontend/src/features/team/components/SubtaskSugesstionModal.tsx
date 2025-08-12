@@ -16,6 +16,7 @@ type Props = {
   onCancel: () => void;
   isLoading?: boolean;
   taskId: string;
+  overrideTitle?: string;
   onRetry: () => void;
 };
 
@@ -27,13 +28,16 @@ export const SubtaskSuggestionModal: FC<Props> = ({
   onCancel,
   isLoading = false,
   taskId,
+  overrideTitle,
   onRetry,
 }) => {
   const task = useAppSelector((state) =>
     state.kanban.tasks.find((t) => t.id === taskId),
   );
 
-  const currentTitle = task?.taskTitle ?? "Nhiệm vụ chưa xác định";
+  const currentTitle =
+    overrideTitle ?? task?.taskTitle ?? "Nhiệm vụ chưa xác định";
+
   if (!isOpen) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
@@ -73,33 +77,33 @@ export const SubtaskSuggestionModal: FC<Props> = ({
           ))}
         </div>
         <div className="mb-2 flex items-center justify-between text-xs text-yellow-800">
-  <span>
-    <span className="font-medium text-yellow-700">Task:</span>{" "}
-    {currentTitle}
-  </span>
+          <span>
+            <span className="font-medium text-yellow-700">Task:</span>{" "}
+            {currentTitle}
+          </span>
 
-  <button
-    onClick={onRetry}
-    disabled={isLoading}
-    className="ml-2 flex h-5 w-5 items-center justify-center rounded-full border border-red-400 bg-red-100 text-red-500 hover:bg-red-200 disabled:opacity-40 transition"
-  >
-    {/* 🔄 Icon xoay xoay */}
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4 4v6h6M20 20v-6h-6M4 10a9 9 0 0116 0M20 14a9 9 0 01-16 0"
-      />
-    </svg>
-  </button>
-</div>
+          <button
+            onClick={onRetry}
+            disabled={isLoading}
+            className="ml-2 flex h-5 w-5 items-center justify-center rounded-full border border-red-400 bg-red-100 text-red-500 transition hover:bg-red-200 disabled:opacity-40"
+          >
+            {/* 🔄 Icon xoay xoay */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              className={`h-3.5 w-3.5 ${isLoading ? "animate-spin" : ""}`}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 4v6h6M20 20v-6h-6M4 10a9 9 0 0116 0M20 14a9 9 0 01-16 0"
+              />
+            </svg>
+          </button>
+        </div>
 
         {/* 📦 Danh sách gợi ý */}
         {isLoading ? (

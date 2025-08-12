@@ -316,6 +316,7 @@ export const TaskDetailModal = ({
                 onToggleSelect={toggleSuggestion}
                 isLoading={isLoadingSuggestion}
                 taskId={task.id}
+                overrideTitle={title}
                 onRetry={handleRetry}
               />
 
