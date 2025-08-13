@@ -43,7 +43,7 @@ export const loginThunk = createAsyncThunk(
   "auth/login",
   async (payload: { email: string; password: string }, { rejectWithValue }) => {
     try {
-      const res = await axios.post("/api/auth/authenticate", payload);
+      const res = await api.post("/api/auth/authenticate", payload);
       const token = res.data.access_token;
       localStorage.setItem("token", token);
       return { token }; // ✅ chỉ trả token
@@ -73,7 +73,7 @@ export const registerThunk = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const res = await axios.post("/api/auth/register", form);
+      const res = await api.post("/api/auth/register", form);
       return {
         secretImageUri: res.data.secretImageUri,
         mfaEnabled: res.data.mfaEnabled,
@@ -90,7 +90,7 @@ export const verifyCodeThunk = createAsyncThunk(
   "auth/verifyCode",
   async (payload: { email: string; code: string }, { rejectWithValue }) => {
     try {
-      const res = await axios.post("/api/auth/verify", payload);
+      const res = await api.post("/api/auth/verify", payload);
       const token = res.data.access_token;
       const user = res.data.user; // ✅ Nếu server trả user sau xác thực
       localStorage.setItem("token", token);

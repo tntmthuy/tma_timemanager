@@ -1,5 +1,5 @@
 // task.ts
-import axios from "axios";
+import { api } from "../../api/axios";
 import type { SubTask } from "./subtask";
 import type { AssigneeDTO } from "./member";
 
@@ -37,16 +37,8 @@ export interface AssignedTask {
 
 export const createTask = async (
   columnId: string,
-  title: string,
-  token: string
+  title: string
 ): Promise<TaskDto> => {
-  const res = await axios.post(
-    "/api/kanban/task",
-    { columnId, title },
-    {
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-
+  const res = await api.post("/api/kanban/task", { columnId, title });
   return res.data.data as TaskDto;
 };

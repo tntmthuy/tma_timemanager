@@ -27,7 +27,7 @@ export const AddTaskInlineInput = ({ columnId, teamId, onAddTask }: Props) => {
     if (!trimmed || !token) return;
 
     try {
-      const task = await createTask(columnId, trimmed, token);
+      const task = await createTask(columnId, trimmed);
       onAddTask(task);
       dispatch(fetchTeamCalendarThunk(teamId));
       setValue("");
